@@ -1,0 +1,6 @@
+[
+    {
+        "name": "GetOnCallNotes",
+        "description": "Get the on call notes for the current on call rotation to be edited and submitted"
+    }
+]

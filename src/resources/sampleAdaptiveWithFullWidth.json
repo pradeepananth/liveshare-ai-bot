@@ -1,0 +1,41 @@
+{
+    "type": "AdaptiveCard",
+    "body": [
+        {
+            "type": "Container",
+            "items": [
+                {
+                    "type": "TextBlock",
+                    "text": "Sample Adaptive Card",
+                    "size": "Large",
+                    "weight": "Bolder"
+                }
+            ]
+        },
+        {
+            "type": "TextBlock",
+            "text": "Submit your query!"
+          },
+          {
+            "type": "Input.Text",
+            "id": "multilineInputId",
+            "placeholder": "enter query",
+            "maxLength": 500,
+            "isMultiline": true
+          }
+    ],
+    "actions": [
+        {
+            "type": "Action.Submit",
+            "title": "Submit",
+            "data": {
+                "verb": "AICard"
+              }
+        }
+    ],
+    "$schema": "https://adaptivecards.io/schemas/adaptive-card.json",
+    "version": "1.5",
+    "msteams": {
+        "width": "Full"
+    }
+}
