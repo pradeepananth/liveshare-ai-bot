@@ -18,30 +18,16 @@ The variations should always include ${item} and ${list} variables.
 7 variations were asked for so that we can remove the 2 we like the least.
 */
 
-/**
- * Returns a string with the current status of the lights and a suggestion to switch them on or off.
- * @param {boolean} status - A boolean indicating whether the lights are currently on or off.
- * @returns {string} A string with the current status of the lights and a suggestion to switch them on or off.
- */
-export function lightStatus(status: boolean): string {
-    const currently = status ? 'on' : 'off';
-    const opposite = status ? 'off' : 'on';
+export function getOnCallNotesInitialValue(): string {
     return (
         getRandomResponse([
-            `The lights are currently ${currently}.`,
-            `It looks like the lights are ${currently}.`,
-            `Right now the lights are ${currently}.`,
-            `The lights are ${currently} at the moment.`,
-            `They are ${currently}.`
-        ]) +
-        getRandomResponse([
-            ` Would you like to switch them ${opposite}?`,
-            ` Should I turn them ${opposite}?`,
-            ` Can I flip them ${opposite} for you?`,
-            ` Would you like them ${opposite}?`,
-            ``
-        ])
-    );
+            `On call Notes for 1/3, session 7 PM - 12 AM: 
+            1 . 7 : 00 PM - 8 : 00 PM : Escalated issue with application to development team . 
+            2 . 8 : 00 PM - 9 : 00 PM : Provided remote support to user experiencing login issues . 
+            3 . 9 : 00 PM - 10 : 00 PM : Conduct ed system updates and maintenance . 
+            4 . 10 : 00 PM - 11 : 00 PM : Performed routine backups and testing . 
+            5 . 11 : 00 PM - 12 : 00 AM : Monitored system performance and resolved minor issues.`,
+        ]));
 }
 
 /**

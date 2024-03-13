@@ -16,7 +16,7 @@ import {
     PromptManager,
     TeamsAdapter
 } from '@microsoft/teams-ai';
-import { getApp } from './bots/getApp';
+import { getLiveShareAceBotApp } from './bots/getLiveShareAceBotApp';
 
 // Read botFilePath and botFileSecret from .env file.
 const ENV_FILE = path.join(__dirname, '..', '.env');
@@ -96,7 +96,7 @@ const planner = new ActionPlanner({
     defaultPrompt: 'sequence'
 });
 
-const app = getApp(planner);
+const app = getLiveShareAceBotApp(planner);
 // Listen for incoming server requests.
 server.post('/api/messages', async (req, res) => {
     // Route received a request to adapter for processing

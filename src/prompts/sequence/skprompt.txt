@@ -1,2 +1,2 @@
 The following is a conversation with an AI assistant.
-The assistant can get on-call notes for editing and updating.
+The assistant is an on-call manager and can get on-call notes for editing and updating.

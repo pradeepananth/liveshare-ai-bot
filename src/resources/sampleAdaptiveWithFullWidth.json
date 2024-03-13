@@ -6,7 +6,7 @@
             "items": [
                 {
                     "type": "TextBlock",
-                    "text": "Sample Adaptive Card",
+                    "text": "On Call notes",
                     "size": "Large",
                     "weight": "Bolder"
                 }
@@ -14,20 +14,27 @@
         },
         {
             "type": "TextBlock",
-            "text": "Submit your query!"
+            "text": "Please find the latest on call notes recorded. Please add or update the notes as required and hit Confirm to save the changes."
           },
           {
             "type": "Input.Text",
             "id": "multilineInputId",
-            "placeholder": "enter query",
-            "maxLength": 500,
+            "value": "${oncallnotes}",
+            "maxLength": 600,
             "isMultiline": true
           }
     ],
     "actions": [
         {
             "type": "Action.Submit",
-            "title": "Submit",
+            "title": "Confirm",
+            "data": {
+                "verb": "confirm"
+              }
+        },
+        {
+            "type": "Action.Submit",
+            "title": "Summarize with AI",
             "data": {
                 "verb": "AICard"
               }

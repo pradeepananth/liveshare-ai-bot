@@ -1,26 +1,8 @@
-# AI in Microsoft Teams: Light Bot
+# AI in Microsoft Teams with Live Share integration
 
-LightBot: Your Enlightened Assistant. This example showcases how the LightBot understands user intent, accurately interpreting commands to effortlessly control light bot.
+## On call manager bot
 
-<!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=6 orderedList=false} -->
 
-<!-- code_chunk_output -->
-
--   [AI in Microsoft Teams: Light Bot](#ai-in-microsoft-teams-light-bot)
-    -   [Interacting with the bot](#interacting-with-the-bot)
-    -   [Setting up the sample](#setting-up-the-sample)
-    -   [Testing the sample](#testing-the-sample)
-        -   [Using Teams Toolkit for Visual Studio Code](#using-teams-toolkit-for-visual-studio-code)
-
-<!-- /code_chunk_output -->
-
-Explore how the LightBot understands, allowing precise control over turning lights on and off, while demonstrating the power and potential of the Language Model in understanding and executing user intent accurately mapped with app actions.
-
-This sample shows how to incorporate basic conversational flow into a Teams application. It also illustrates a few of the Teams specific calls you can make from your bot.
-
-## Interacting with the bot
-
-You can tell the bot to do actions like turning lights on, off, or dimming them. You can also ask about the status of the lights.
 
 ## Setting up the sample
 
@@ -33,18 +15,13 @@ You can tell the bot to do actions like turning lights on, off, or dimming them.
 2. In the root JavaScript folder, install and build all dependencies
 
     ```bash
-    cd teams-ai/js
     yarn install
     yarn build
     ```
 
 3. In a terminal, navigate to the sample root.
 
-    ```bash
-    cd teams-ai/js/samples/04.ai.c.actionMapping.lightBot/
-    ```
-
-4. Duplicate the `sample.env` in this folder. Rename the file to `.env`.
+4. Create file named `.env`.
 
 5. Fill in the variables with your credentials. If you are using OpenAI then only keep the `OPENAI_KEY` and add in your key. Otherwise if you are using AzureOpenAI then only keep the `AZURE_OPENAI_KEY`, `AZURE_OPENAI_ENDPOINT` variables and fill them in appropriately.
 

@@ -1,54 +1,55 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-import { MessageFactory, CardFactory, MemoryStorage, TurnContext } from 'botbuilder';
-import SampleAdaptiveCard from '../resources/sampleAdaptiveWithFullWidth.json';
+import { MessageFactory, CardFactory, MemoryStorage, TurnContext, Activity } from 'botbuilder';
+import OnCallNotesAC from '../resources/sampleAdaptiveWithFullWidth.json';
 import { OpenAIClient, AzureKeyCredential } from "@azure/openai";
 import { Application, DefaultConversationState, TurnState } from '@microsoft/teams-ai';
+import * as ACData from "adaptivecards-templating";
+import { getOnCallNotesInitialValue } from '../responses';
 
 const deploymentId = "TestingTeamsBots";
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface ConversationState extends DefaultConversationState {
-    lightsOn: boolean;
+    onCallNotes: string;
 }
 type ApplicationTurnState = TurnState<ConversationState>;
 
-export const getApp = (planner: any) => {
-    const storage = new MemoryStorage();    
+export const getLiveShareAceBotApp = (planner: any) => {
+    const storage = new MemoryStorage();
     const app = new Application<ApplicationTurnState>({
-    storage,
-    ai: {
-        planner
-    }
+        storage,
+        ai: {
+            planner
+        }
     });
 
-    app.ai.action('GetOnCallNotes', async (context: TurnContext) => {
-        await context.sendActivity({ attachments: [SendSubmitAIQuery()] });
+    app.ai.action('GetOnCallNotes', async (context: TurnContext, state: ApplicationTurnState) => {
+        const onCallNotes = state.conversation.onCallNotes ?? getOnCallNotesInitialValue();
+        const card = SendSubmitAIQuery(onCallNotes);
+        await context.sendActivity({ attachments: [card] });
         return `On call notes received.`;
     });
 
-    app.adaptiveCards.actionSubmit('AICard', async (context: TurnContext) => {
-        if (typeof context.activity.value === "object") {
-            switch (context.activity.value.verb) {
-                case "AICard":
-                    await sendChatGptResponseIfSubmitAction(context);
-                    break;
-                default:
-                    break;
-            }
-        } else {
-        await context.sendActivity('I do not understand that command.');
-        }
+    app.adaptiveCards.actionSubmit('confirm', async (context: TurnContext, state: ApplicationTurnState) => {
+        state.conversation.onCallNotes = context.activity.value.multilineInputId;
+    });
+
+    app.adaptiveCards.actionSubmit('AICard', async (context: TurnContext, state: ApplicationTurnState) => {
+        state.conversation.onCallNotes = context.activity.value.multilineInputId;
+        await sendChatGptResponseIfSubmitAction(context);
     });
 
     return app;
 };
 
- /**
-    * Sends Sample Adaptive Card For AI query input
-    */
- const SendSubmitAIQuery = () => {
-    return CardFactory.adaptiveCard(SampleAdaptiveCard);
+/**
+   * Sends Sample Adaptive Card For AI query input
+   */
+const SendSubmitAIQuery = (oncallnotes: string) => {
+    var template = new ACData.Template(OnCallNotesAC);
+    const card = template.expand({ $root: { oncallnotes } });
+    return CardFactory.adaptiveCard(card);
 }
 
 const sendChatGptResponseIfSubmitAction = async (context: TurnContext) => {
@@ -85,5 +86,5 @@ const sendChatGptResponseIfSubmitAction = async (context: TurnContext) => {
 const streamUpdates = async (resArray: any[], oldActivityId: string | undefined, context: TurnContext) => {
     let newActivity = MessageFactory.text(resArray.join(" "));
     newActivity.id = oldActivityId;
-    await context.updateActivity(newActivity); 
+    await context.updateActivity(newActivity);
 };
