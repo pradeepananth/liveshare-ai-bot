@@ -1,6 +1,10 @@
 [
     {
-        "name": "GetOnCallNotes",
-        "description": "Get the on call notes for the current on call rotation to be edited and submitted"
+        "name": "GetCallNotes",
+        "description": "Get or show call notes for the meeting"
+    },
+    {
+        "name": "GetPrepNotes",
+        "description": "Get or show the prep notes for the meeting  with someone"
     }
 ]

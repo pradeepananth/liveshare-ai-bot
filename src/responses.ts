@@ -21,14 +21,26 @@ The variations should always include ${item} and ${list} variables.
 export function getOnCallNotesInitialValue(): string {
     return (
         getRandomResponse([
-            `On call Notes for 1/3, session 7 PM - 12 AM: 
-            1 . 7 : 00 PM - 8 : 00 PM : Escalated issue with application to development team . 
-            2 . 8 : 00 PM - 9 : 00 PM : Provided remote support to user experiencing login issues . 
-            3 . 9 : 00 PM - 10 : 00 PM : Conduct ed system updates and maintenance . 
-            4 . 10 : 00 PM - 11 : 00 PM : Performed routine backups and testing . 
-            5 . 11 : 00 PM - 12 : 00 AM : Monitored system performance and resolved minor issues.`,
+            `Call Notes: 
+            1 . Create a Sales Training Workshop. 
+            2 . Segment Your Customer Base. 
+            3 . Research Competitors and Market Trends. 
+            4 . Develop Personalized Sales Pitches. 
+            5 . Collaborate with Marketing.`,
         ]));
 }
+
+
+export function getPrepNotesInitialValue(): string {
+    return (
+        getRandomResponse([
+            `Prep notes 
+            1 . Item one in the list .
+            2 . Item two in the list .
+            3 . Item three in the list .`,
+        ]));
+}
+
 
 /**
  * Responds when an unknown action is called
